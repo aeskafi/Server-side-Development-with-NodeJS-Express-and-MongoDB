@@ -59,6 +59,10 @@ leaderRouter.route('/:leaderId')
             .catch((err) => next(err));
     })
     .post((req, res, next) => {
+        res.statusCode = 403;
+        res.end('POST operation not supported on /leaders/' + req.params.leaderId);
+    })
+    .put((req, res, next) => {
         Leaders.findByIdAndUpdate(req.params.leaderId, {
             $set: req.body
         }, { new: true })
@@ -68,11 +72,6 @@ leaderRouter.route('/:leaderId')
                 res.json(leader);
             }, (err) => next(err))
             .catch((err) => next(err));
-    })
-    .put((req, res, next) => {
-        res.statusCode = 403;
-        res.end('PUT operation not supported on /Leaders/'
-            + req.params.leaderId);
     })
     .delete((req, res, next) => {
         Leaders.findById(req.params.leaderId)
