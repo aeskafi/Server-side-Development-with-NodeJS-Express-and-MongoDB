@@ -28,7 +28,7 @@ const leaderSchema = new Schema({
     },
     abbr: {
         type: String,
-        default: ''
+        required: true,
     },
     description: {
         type: String,
