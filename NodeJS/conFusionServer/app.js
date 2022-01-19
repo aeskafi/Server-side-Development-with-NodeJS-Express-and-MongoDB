@@ -18,7 +18,7 @@ const connect = mongoose.connect(url);
 
 connect.then((db) => {
   console.log('Connected correctly to server')
-}, (err) => { console.log(err) });
+}, (err) => {console.log(err)});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -28,13 +28,21 @@ var leaderRouter = require('./routes/leaderRouter');
 
 var app = express();
 
+app.all('*', (req, res, next) => {
+  if (req.secure) {
+    return next();
+  } else {
+    res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+  }
+})
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 // app.use(cookieParser('12345-67890-09876-54321'));
 
 app.use(passport.initialize());
