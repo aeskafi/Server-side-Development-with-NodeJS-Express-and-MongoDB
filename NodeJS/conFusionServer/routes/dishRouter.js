@@ -1,14 +1,3 @@
-// DONE: In this task you will update all the routes in the REST API to ensure that only the Admins can perform POST, PUT and DELETE operations. Update the code for all the routers to support this. These operations should be supported for the following end points:
-// DONE: POST, PUT and DELETE operations on / dishes and / dishes /: dishId
-// DONE: DELETE operation on / dishes /: dishId / comments
-// DONE: Error message is (You are not authorized to perform this operation!)
-// DONE: Error status code is (403)
-
-// DONE: A registered user is allowed to update and delete his / her own comments. (POST/PUT/DELETE)
-// DONE: Any user or an Admin cannot update or delete the comment posted by other users.
-// DONE: Error message is (You are not authorized to delete this comment)
-// DONE: Error status code is (403)
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
